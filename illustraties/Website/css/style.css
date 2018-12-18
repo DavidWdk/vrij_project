@@ -39,6 +39,14 @@ svg image {
     opacity: 0;
 }
 
-/* #bigBuilding {
-  transform: translateY(-1000px);
-} */
+.lichten {
+  opacity: 0;
+}
+
+.planeLight {
+  opacity: 0;
+}
+
+.planeLight2 {
+  opacity: 0.3;
+}
