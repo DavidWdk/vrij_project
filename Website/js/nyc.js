@@ -47,18 +47,18 @@ var lightUp = new TimelineMax();
   lightUp.from(building9,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
 
   var gradients = document.querySelectorAll("svg image")
-  lightUp.to(gradients,  2, {ease: Power4.easeIn, opacity: 1})
+  lightUp.to(gradients,  2, {ease: Power4.easeIn, opacity: 1}, 0)
 
   var appartement = document.querySelectorAll(".st2809")
   lightUp.to(appartement,  1, {ease: Power4.easeIn, fill: "rgb(24, 25, 44)"}, "-=1")
 
-  var vliegtuig = document.querySelector("#plane")
-  lightUp.to(vliegtuig,  35, {ease: Power0.easeNone, x: 2100})
+  // var vliegtuig = document.querySelector("#plane")
+  // lightUp.to(vliegtuig,  35, {ease: Power0.easeNone, x: 2100})
 
   var vliegtuigKnipper = document.querySelectorAll(".planeLight")
-  lightUp.from(vliegtuigKnipper,  0.5, {opacity: 0.2, repeat:-1, yoyo:true, repeatDelay: 1, ease:Linear.easeNone}, 0);
+  lightUp.to(vliegtuigKnipper,  0.5, {opacity: 0.2, repeat:-1, yoyo:true, repeatDelay: 1, ease:Linear.easeNone});
 
-  // var vliegtuig = document.querySelector("#plane")
-  // lightUp.to(vliegtuig,  1, {ease: Power0.easeNone, x: 150})
+  var vliegtuig = document.querySelector("#plane")
+  lightUp.to(vliegtuig,  1, {ease: Power0.easeNone, x: 150})
 
 }, false);
