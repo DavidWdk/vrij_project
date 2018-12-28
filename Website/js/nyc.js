@@ -8,7 +8,7 @@ var lightUp = new TimelineMax();
   lightUp.to(lichten,  1, {delay: 1, ease: Power2.easeOut, opacity: 1})
 
   var buildingLinks1 = document.querySelectorAll("#bouw1_1_")
-  lightUp.from(buildingLinks1,  3, {ease: Power4.easeOut, y: 800})
+  lightUp.from(buildingLinks1,  3, {ease: Power4.easeOut, y: 800}, "-=0.8")
 
   var buildingLinks2 = document.querySelectorAll("#bouw2_1_")
   lightUp.from(buildingLinks2,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
@@ -47,18 +47,27 @@ var lightUp = new TimelineMax();
   lightUp.from(building9,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
 
   var gradients = document.querySelectorAll("svg image")
-  lightUp.to(gradients,  2, {ease: Power4.easeIn, opacity: 1}, 0)
+  lightUp.to(gradients,  2, {ease: Power4.easeIn, opacity: 1}, "-=1")
 
   var appartement = document.querySelectorAll(".st2809")
   lightUp.to(appartement,  1, {ease: Power4.easeIn, fill: "rgb(24, 25, 44)"}, "-=1")
 
-  // var vliegtuig = document.querySelector("#plane")
-  // lightUp.to(vliegtuig,  35, {ease: Power0.easeNone, x: 2100})
-
-  var vliegtuigKnipper = document.querySelectorAll(".planeLight")
-  lightUp.to(vliegtuigKnipper,  0.5, {opacity: 0.2, repeat:-1, yoyo:true, repeatDelay: 1, ease:Linear.easeNone});
+  var vliegtuigL = document.querySelector("#plane")
+  lightUp.to(vliegtuigL,  0.5, {ease: Power0.easeNone, opacity: 0.1})
 
   var vliegtuig = document.querySelector("#plane")
-  lightUp.to(vliegtuig,  1, {ease: Power0.easeNone, x: 150})
+  lightUp.to(vliegtuig,  35, {ease: Power0.easeNone, x: 2100},11)
+
+  var vliegtuigKnipper = document.querySelectorAll(".planeLight")
+  lightUp.to(vliegtuigKnipper,  0.5, {opacity: 0, repeat:-1, yoyo:true, repeatDelay: 1, ease:Linear.easeNone},11)
+
+  // var vliegtuigL2 = document.querySelector("#planeLight2")
+  // lightUp.to(vliegtuigL2,  0.5, {ease: Power0.easeNone, opacity: 0.3})
+
+
+  // var vliegtuig = document.querySelector("#plane")
+  // lightUp.to(vliegtuig,  1, {ease: Power0.easeNone, x: 150})
+
+  //Totaal aantal Tweens: 21 (incl. alle commented tweens)
 
 }, false);
