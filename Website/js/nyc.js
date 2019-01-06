@@ -1,5 +1,109 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+var dialogOpen = false;
+var showInfo = false;
+var infoClicked = false;
+
+$("#btn").mouseenter(function btnHover(){
+  if (dialogOpen == false) {
+  var pullUp = document.querySelector("#btn")
+  TweenMax.to(pullUp,  1, {ease: Elastic.easeOut.config(1.5, 0.4), x: -10})
+}});
+
+$("#btn").mouseleave(function btnHoverFalse(){
+  if (dialogOpen == false) {
+  var pullDown = document.querySelector("#btn")
+  TweenMax.to(pullDown,  0.3, {ease: Power4.easeInOut, x: 0})
+}});
+
+$(".st2957, .st2958").click(function dialog(){
+
+//Code zodra de button wordt geklikt
+if (dialogOpen == false){
+
+  var dialog = document.querySelector("#infoBtn")
+  TweenMax.to(dialog,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: -60})
+
+  var dialog2 = document.querySelector("#planeBtn")
+  TweenMax.to(dialog2,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: 60})
+
+  var arrow = document.querySelector("#wijzer")
+  TweenMax.to(arrow,  0.9, {ease: Elastic.easeOut.config(1, 0.5), transformOrigin:"center", rotation: "+=180", x: 5})
+
+  dialogOpen = true;
+}
+
+//Code zodra de button nog eens wordt geklikt en de buttons worden ingeklapt
+else {
+
+  var glowDown = document.querySelector("#infoBtn")
+  TweenMax.to(glowDown,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+
+  var glowDown2 = document.querySelector("#planeBtn")
+  TweenMax.to(glowDown2,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+
+  var dialog = document.querySelector("#infoBtn")
+  TweenMax.to(dialog,  0.8, {ease: Elastic.easeOut.config(1, 2), x: 0, y: 0})
+
+  var dialog2 = document.querySelector("#planeBtn")
+  TweenMax.to(dialog2,  0.8, {ease: Elastic.easeOut.config(1, 2), x: 0, y: 0})
+
+  var arrow = document.querySelector("#wijzer")
+  TweenMax.to(arrow,  0.9, {ease: Elastic.easeOut.config(1, 0.5), transformOrigin:"center", rotation: "+=180", x: 0})
+
+  var showInfo = document.querySelector("#NYDescription")
+  TweenMax.to(showInfo,  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: -230})
+
+  dialogOpen = false;
+}});
+
+
+$("#infoBtn").click(function showInfo(){
+
+if (infoClicked == false) {
+
+  var glowUp = document.querySelector("#infoBtn")
+  TweenMax.to(glowUp,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+
+  var showInfo = document.querySelector("#NYDescription")
+  TweenMax.to(showInfo,  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: 0})
+
+  infoClicked = true;
+}
+
+else{
+
+  var glowDown = document.querySelector("#infoBtn")
+  TweenMax.to(glowDown,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+
+  var showInfo = document.querySelector("#NYDescription")
+  TweenMax.to(showInfo,  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: -230})
+
+infoClicked = false;
+
+}});
+
+$("#planeBtn").click(function goToPlane(){
+
+  var glowUp2 = document.querySelector("#planeBtn")
+  TweenMax.to(glowUp2,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+
+  setTimeout("location.href = '../index.html';",500);
+});
+
+// $("#btn").click(function btnHoverFalse(){
+//   if (dialogOpen == true){
+//
+//     var dialog = document.querySelector("#infoBtn")
+//   TweenMax.to(dialog,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: -60})
+//
+//   var dialog2 = document.querySelector("#planeBtn")
+//   TweenMax.to(dialog2,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: 60})
+//
+//   dialogOpen = false;
+// });
+//
+
 
 
 var lightUp = new TimelineMax();
