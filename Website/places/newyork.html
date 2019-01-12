@@ -33698,7 +33698,7 @@
 		<path class="st2817" d="M269.9,490"/>
 	</g>
 </g>
-<!-- onmouseenter="bounce()" onmouseleave="bounceBack()" onclick="dialog()" -->
+
  <g id="btn">
   <g id="planeBtn">
 			<ellipse class="st2950" cx="1922.5" cy="156.4" rx="20.9" ry="20.9"/>
@@ -33746,9 +33746,26 @@
 </g>
 </svg>
 
+<audio id="aarbeving" controls="controls" onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 2000)">
+    <source src="../audio/earthquake.m4a" type="audio/mp3" />
+</audio>
+
+<iframe src="../audio/traffic.m4a" allow="autoplay" style="display:none" id="iframeAudio" class="audio">
+</iframe>
+
+<audio autoplay loop  id="playAudio" class="audio">
+      <source src="../audio/traffic.m4a">
+</audio>
+
+<img src="../audio/soundOnNY.png" class="soundBtn">
+
 <div id="NYDescription">
   <h2>New York.</h2>
-  U bevindt zich momenteel in het penthouse in het Hilton Hotel in New York.
+  U bevindt zich momenteel in een penthouse in het Hilton Hotel in New York.
+</div>
+
+<div class="welkom">
+  WELKOM IN NEW YORK.
 </div>
 
 </body>

@@ -1,177 +1,166 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+//variabelen waardoor animaties worden genegeerd of juist afspelen op momenten waar dat nodig is.
 var dialogOpen = false;
 var showInfo = false;
 var infoClicked = false;
+var planeClicked = false;
+var soundOn = true;
+var aardbeving = document.getElementById("aardbeving");
+// var audio = new Audio('../audio/traffic.m4a');
+// audio.play();
 
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+  if(!isChrome){
+    $('#iframeAudio').remove()
+  }
+else{
+   $('#playAudio').remove() //just to make sure that it will not have 2x audio in the background
+}
+
+
+
+//audio regeling
+$(".soundBtn").click(function mute(){
+if (soundOn == true) {
+  $(".soundBtn").attr('src',"../audio/soundOnNY.png");
+  aarbeving.muted = false;
+  audio.muted = false;
+  soundOn = false;
+  console.log(soundOn);
+} else {
+  $(".soundBtn").attr('src',"../audio/soundOffNY.png");
+  $("#aarbeving").muted = true;
+  aarbeving.muted = true;
+  audio.muted = true;
+  soundOn = true;
+  console.log(soundOn);
+}});
+
+
+//onderstaande code tot waar aangegeven allemaal voor de uitklap button rechts boven
+
+//kleine verschuif animatie bij mouse enter
 $("#btn").mouseenter(function btnHover(){
   if (dialogOpen == false) {
-  var pullUp = document.querySelector("#btn")
-  TweenMax.to(pullUp,  1, {ease: Elastic.easeOut.config(1.5, 0.4), x: -10})
+
+  TweenMax.to($("#btn"),  1, {ease: Elastic.easeOut.config(1.5, 0.4), x: -10})
 }});
 
+//verschuift terug bij mouse leave
 $("#btn").mouseleave(function btnHoverFalse(){
   if (dialogOpen == false) {
-  var pullDown = document.querySelector("#btn")
-  TweenMax.to(pullDown,  0.3, {ease: Power4.easeInOut, x: 0})
+
+  TweenMax.to($("#btn"),  0.3, {ease: Power4.easeInOut, x: 0})
 }});
 
+//vegroten van de info button bij mouse hover, behalve als infoclicked true is.
+$("#infoBtn").mouseenter(function btnHover(){
+if (infoClicked == false) {
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.2, scaleY:1.2})
+}
+if (infoClicked == true) {
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+}
+
+});
+
+//vegroten van de plane button bij mouse hover, behalve als deze is aangeklikt, dan blijft deze groot
+$("#planeBtn").mouseenter(function btnHover(){
+if (planeClicked == false) {
+  TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.2, scaleY:1.2})
+}
+else {
+    TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+  }
+});
+
+//terugschalen van de info button bij mouseleave, behalve als de info knop actief is
+$("#infoBtn").mouseleave(function btnHover(){
+if (infoClicked == false) {
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+}
+else {
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+}});
+
+//terugschalen van de info button bij mouseleave, behalve als deze is aangeklikt
+$("#planeBtn").mouseleave(function btnHover(){
+if (planeClicked == false) {
+  TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+}
+else {
+  TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+}
+});
+
+//uitklappen van de plane en info button en het pijltje wordt omgedraait. dialogOpen wordt geactiveert.
 $(".st2957, .st2958").click(function dialog(){
-
-//Code zodra de button wordt geklikt
 if (dialogOpen == false){
-
-  var dialog = document.querySelector("#infoBtn")
-  TweenMax.to(dialog,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: -60})
-
-  var dialog2 = document.querySelector("#planeBtn")
-  TweenMax.to(dialog2,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: 60})
-
-  var arrow = document.querySelector("#wijzer")
-  TweenMax.to(arrow,  0.9, {ease: Elastic.easeOut.config(1, 0.5), transformOrigin:"center", rotation: "+=180", x: 5})
-
+  TweenMax.to($("#infoBtn"),  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: -60})
+  TweenMax.to($("#planeBtn"),  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: 60})
+  TweenMax.to($("#wijzer"),  0.9, {ease: Elastic.easeOut.config(1, 0.5), transformOrigin:"center", rotation: "+=180", x: 5})
   dialogOpen = true;
 }
 
-//Code zodra de button nog eens wordt geklikt en de buttons worden ingeklapt
+//code zodra de button nog eens wordt geklikt en de buttons worden ingeklapt. Maakt ook zeker dat elke button
+//weer terug wordt geschaalt naar normale grote en het info kader wordt terug gepositioneerd.
 else {
-
-  var glowDown = document.querySelector("#infoBtn")
-  TweenMax.to(glowDown,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
-
-  var glowDown2 = document.querySelector("#planeBtn")
-  TweenMax.to(glowDown2,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
-
-  var dialog = document.querySelector("#infoBtn")
-  TweenMax.to(dialog,  0.8, {ease: Elastic.easeOut.config(1, 2), x: 0, y: 0})
-
-  var dialog2 = document.querySelector("#planeBtn")
-  TweenMax.to(dialog2,  0.8, {ease: Elastic.easeOut.config(1, 2), x: 0, y: 0})
-
-  var arrow = document.querySelector("#wijzer")
-  TweenMax.to(arrow,  0.9, {ease: Elastic.easeOut.config(1, 0.5), transformOrigin:"center", rotation: "+=180", x: 0})
-
-  var showInfo = document.querySelector("#NYDescription")
-  TweenMax.to(showInfo,  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: -230})
-
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+  TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), x: 0, y: 0})
+  TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), x: 0, y: 0})
+  TweenMax.to($("#wijzer"),  0.9, {ease: Elastic.easeOut.config(1, 0.5), transformOrigin:"center", rotation: "+=180", x: 0})
+  TweenMax.to($("#NYDescription"),  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: -230})
   dialogOpen = false;
 }});
 
-
+//laat de info zien en vergroot de info knop om te laten zien dat het actief is.
 $("#infoBtn").click(function showInfo(){
-
 if (infoClicked == false) {
-
-  var glowUp = document.querySelector("#infoBtn")
-  TweenMax.to(glowUp,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
-
-  var showInfo = document.querySelector("#NYDescription")
-  TweenMax.to(showInfo,  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: 0})
-
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+  TweenMax.to($("#NYDescription"),  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: 0})
   infoClicked = true;
 }
-
+//als infoclick true is en de info button wordt aangeklikt schaalt de knop zich terug en de info wordt ingeklapt.
 else{
-
-  var glowDown = document.querySelector("#infoBtn")
-  TweenMax.to(glowDown,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
-
-  var showInfo = document.querySelector("#NYDescription")
-  TweenMax.to(showInfo,  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: -230})
-
+  TweenMax.to($("#infoBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1, scaleY:1})
+  TweenMax.to($("#NYDescription"),  1, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", y: -230})
 infoClicked = false;
-
 }});
 
+//als de plane button wordt aangeklikt vergroot de button zich en wordt de gebruiker naar de startpagina gestuurt.
 $("#planeBtn").click(function goToPlane(){
-
-  var glowUp2 = document.querySelector("#planeBtn")
-  TweenMax.to(glowUp2,  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
+  planeClicked = true;
+  TweenMax.to($("#planeBtn"),  0.8, {ease: Elastic.easeOut.config(1, 2), transformOrigin:"center", scaleX:1.4, scaleY:1.4})
 
   setTimeout("location.href = '../index.html';",500);
 });
+//tot de functie hierboven bestond dit bestand uitsluitend uit code die de knop linksboven regelt.
 
-// $("#btn").click(function btnHoverFalse(){
-//   if (dialogOpen == true){
-//
-//     var dialog = document.querySelector("#infoBtn")
-//   TweenMax.to(dialog,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: -60})
-//
-//   var dialog2 = document.querySelector("#planeBtn")
-//   TweenMax.to(dialog2,  1.3, {ease: Elastic.easeOut.config(1, 0.5), x: -100, y: 60})
-//
-//   dialogOpen = false;
-// });
-//
-
-
-
+//timeline die animaties afgaat zodra de gebruiker op de newyork.html belandt.
 var lightUp = new TimelineMax();
 
-  var lichten = document.querySelectorAll(".lichten")
-  lightUp.to(lichten,  1, {delay: 1, ease: Power2.easeOut, opacity: 1})
-
-  var buildingLinks1 = document.querySelectorAll("#bouw1_1_")
-  lightUp.from(buildingLinks1,  3, {ease: Power4.easeOut, y: 800}, "-=0.8")
-
-  var buildingLinks2 = document.querySelectorAll("#bouw2_1_")
-  lightUp.from(buildingLinks2,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
-
-  var buildingLinks3 = document.querySelectorAll("#bouw3_1_")
-  lightUp.from(buildingLinks3,  3, {ease: Power4.easeOut, y: 800}, "-=2.5")
-
-  var building1 = document.querySelectorAll("#bouw1")
-  lightUp.from(building1,  3, {ease: Power4.easeOut, y: 800}, "-=2.75")
-
-  var building2 = document.querySelectorAll("#bouw2")
-  lightUp.from(building2,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
-
-  var building3 = document.querySelectorAll("#bouw3")
-  lightUp.from(building3,  3, {ease: Power4.easeOut, y: 800}, "-=2.5")
-
-  var building4 = document.querySelectorAll("#bouw4")
-  lightUp.from(building4,  3, {ease: Power4.easeOut, y: 800}, "-=2.75")
-
-  var building5 = document.querySelectorAll("#bouw5")
-  lightUp.from(building5,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
-
-  var building6 = document.querySelectorAll("#bouw6")
-  lightUp.from(building6,  3, {ease: Power4.easeOut, y: 800}, "-=2.5")
-
-  var building10 = document.querySelectorAll("#gebouw")
-  lightUp.from(building10,  3, {ease: Power4.easeOut, y: 800}, "-=2.8")
-
-  var building7 = document.querySelectorAll("#bouw7")
-  lightUp.from(building7,  3, {ease: Power4.easeOut, y: 800}, "-=2.75")
-
-  var building8 = document.querySelectorAll("#bouw8")
-  lightUp.from(building8,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
-
-  var building9 = document.querySelectorAll("#bouw9")
-  lightUp.from(building9,  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
-
-  var gradients = document.querySelectorAll("svg image")
-  lightUp.to(gradients,  2, {ease: Power4.easeIn, opacity: 1}, "-=1")
-
-  var appartement = document.querySelectorAll(".st2809")
-  lightUp.to(appartement,  1, {ease: Power4.easeIn, fill: "rgb(24, 25, 44)"}, "-=1")
-
-  var vliegtuigL = document.querySelector("#plane")
-  lightUp.to(vliegtuigL,  0.5, {ease: Power0.easeNone, opacity: 0.1})
-
-  var vliegtuig = document.querySelector("#plane")
-  lightUp.to(vliegtuig,  35, {ease: Power0.easeNone, x: 2100},11)
-
-  var vliegtuigKnipper = document.querySelectorAll(".planeLight")
-  lightUp.to(vliegtuigKnipper,  0.5, {opacity: 0, repeat:-1, yoyo:true, repeatDelay: 1, ease:Linear.easeNone},11)
-
-  // var vliegtuigL2 = document.querySelector("#planeLight2")
-  // lightUp.to(vliegtuigL2,  0.5, {ease: Power0.easeNone, opacity: 0.3})
-
-
-  // var vliegtuig = document.querySelector("#plane")
-  // lightUp.to(vliegtuig,  1, {ease: Power0.easeNone, x: 150})
-
-  //Totaal aantal Tweens: 21 (incl. alle commented tweens)
-
+  lightUp.to($("svg image"),  0, {ease: Power4.easeIn, opacity: 0}, "-=1")
+  lightUp.to($("html"),  0, {ease: Power4.easeIn, backgroundColor: "#000"}, "-=1")
+  lightUp.to($(".welkom"),  1, {ease: Power4.easeIn, delay: 4, opacity: 0}, "-=1")
+  lightUp.to($(".lichten"),  1, {delay: 1, ease: Power2.easeOut, opacity: 1})
+  lightUp.from($("#bouw1_1_"),  3, {ease: Power4.easeOut, y: 800}, "-=0.8")
+  lightUp.from($("#bouw2_1_"),  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
+  lightUp.from($("#bouw3_1_"),  3, {ease: Power4.easeOut, y: 800}, "-=2.5")
+  lightUp.from($("#bouw1"),  3, {ease: Power4.easeOut, y: 800}, "-=2.75")
+  lightUp.from($("#bouw2"),  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
+  lightUp.from($("#bouw3"),  3, {ease: Power4.easeOut, y: 800}, "-=2.5")
+  lightUp.from($("#bouw4"),  3, {ease: Power4.easeOut, y: 800}, "-=2.75")
+  lightUp.from($("#bouw5"),  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
+  lightUp.from($("#bouw6"),  3, {ease: Power4.easeOut, y: 800}, "-=2.5")
+  lightUp.from($("#gebouw"),  3, {ease: Power4.easeOut, y: 800}, "-=2.8")
+  lightUp.from($("#bouw7"),  3, {ease: Power4.easeOut, y: 800}, "-=2.75")
+  lightUp.from($("#bouw8"),  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
+  lightUp.from($("#bouw9"),  3, {ease: Power4.easeOut, y: 800}, "-=2.7")
+  lightUp.to($("svg image"),  2, {ease: Power4.easeIn, opacity: 1}, "-=1")
+  lightUp.to($(".st2809"),  1, {ease: Power4.easeIn, fill: "rgb(24, 25, 44)"}, "-=1")
+  lightUp.to($("#plane"),  0.5, {ease: Power0.easeNone, opacity: 0.1})
+  lightUp.to($("#plane"),  35, {ease: Power0.easeNone, x: 2100},11)
+  lightUp.to($(".planeLight"),  0.5, {opacity: 0, repeat:-1, yoyo:true, ease:Linear.easeNone},11)
 }, false);
