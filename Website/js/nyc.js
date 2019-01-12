@@ -5,20 +5,24 @@ var dialogOpen = false;
 var showInfo = false;
 var infoClicked = false;
 var planeClicked = false;
-var soundOn = true;
+var soundOn = false;
 var aardbeving = document.getElementById("aardbeving");
-// var audio = new Audio('../audio/traffic.m4a');
-// audio.play();
 
-var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-  if(!isChrome){
-    $('#iframeAudio').remove()
-  }
-else{
-   $('#playAudio').remove() //just to make sure that it will not have 2x audio in the background
+// var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+//   if(!isChrome){
+//     $('#iframeAudio').remove()
+//   }
+// else{
+//    $('#playAudio').remove() //just to make sure that it will not have 2x audio in the background
+// }
+
+if (soundOn == false) {
+  $(".soundBtn").attr('src',"../audio/soundOffNY.png");
+} else {
+  $(".soundBtn").attr('src',"../audio/soundOnNY.png");
 }
 
-
+var audio = document.getElementById("playAudio");
 
 //audio regeling
 $(".soundBtn").click(function mute(){
@@ -28,7 +32,7 @@ if (soundOn == true) {
   audio.muted = false;
   soundOn = false;
   console.log(soundOn);
-} else {
+} else if (soundOn == false){
   $(".soundBtn").attr('src',"../audio/soundOffNY.png");
   $("#aarbeving").muted = true;
   aarbeving.muted = true;

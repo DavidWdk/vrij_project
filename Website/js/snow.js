@@ -1,39 +1,43 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-  if(!isChrome){
-    $('#iframeAudio').remove()
-  }
-else{
-   $('#playAudio').remove() //just to make sure that it will not have 2x audio in the background
-}
+//om autoplay werkend te krijgen:
+// var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+//   if(!isChrome){
+//     $('#iframeAudio').remove()
+//   }
+// else{
+//    $('#playAudio').remove() //zodat audio niet 2x afspeelt.
+// }
 
 //variabelen waardoor animaties worden genegeerd of juist afspelen op momenten waar dat nodig is.
 var dialogOpen = false;
 var showInfo = false;
 var infoClicked = false;
 var planeClicked = false;
-var soundOn = true;
+var soundOn = false;
 
+if (soundOn == false) {
+  $(".soundBtn").attr('src',"../audio/soundOffSnow.png");
+} else {
+  $(".soundBtn").attr('src',"../audio/soundOnSnow.png");
+}
 
 //audio regeling
-var wind = $(".audio");
-// var wind = new Audio('../audio/wind.mp3');
-wind.volume = 0.1;
-// wind.play();
+var wind = document.getElementById("playAudio");
 
 //audio regeling
 $(".soundBtn").click(function mute(){
 if (soundOn == true) {
   $(".soundBtn").attr('src',"../audio/soundOnSnow.png");
-
   wind.muted = false;
   soundOn = false;
   console.log(soundOn);
+
 } else {
   $(".soundBtn").attr('src',"../audio/soundOffSnow.png");
-  soundOn = true;
   wind.muted = true;
+  soundOn = true;
+  console.log(soundOn);
 }});
 
 
