@@ -144,7 +144,6 @@ $("#planeBtn").click(function goToPlane(){
 
 //timeline die animaties afgaat zodra de gebruiker op de newyork.html belandt.
 var lightUp = new TimelineMax();
-
   lightUp.to($("svg image"),  0, {ease: Power4.easeIn, opacity: 0}, "-=1")
   lightUp.to($("html"),  0, {ease: Power4.easeIn, backgroundColor: "#000"}, "-=1")
   lightUp.to($(".welkom"),  1, {ease: Power4.easeIn, delay: 4, opacity: 0}, "-=1")
